@@ -2,7 +2,7 @@
 <syntax name="swift">
 	<meta>
 		<name>Swift</name>
-		<type>script</type>
+		<type>language</type>
 		<preferred-file-extension>swift</preferred-file-extension>
 	</meta>
 
@@ -107,9 +107,8 @@
 				<string>throws</string>
 				<string>true</string>
 				<string>try</string>
-				<!-- patterns -->
-				<string>_</string>
-				<!-- compiler -->
+				<string>@_exported</string>
+				<string>@discardableResult</string>
 				<string>#available</string>
 				<string>#colorLiteral</string>
 				<string>#column</string>
@@ -126,6 +125,8 @@
 				<string>#selector</string>
 				<string>#sourceLocation</string>
 				<string>#warning</string>
+				<!-- patterns -->
+				<string>_</string>
 				<!-- context specific -->
 				<string>associativity</string>
 				<string>convenience</string>
@@ -164,6 +165,7 @@
 	<collections>
 		<collection name="values">
 				<include syntax="self" collection="strings" />
+				<include syntax="self" collection="numbers" />
 				<scope name="swift.value.null">
 					<strings>
 						<string>nil</string>
@@ -213,6 +215,14 @@
 			</scope>
 		</collection>
 
+		<collection name="numbers">
+			<scope name="swift.number">
+				<expression>=[\s]*([0-9.]+)</expression>
+				<capture number="1" name="swift.string.number.value" />
+			</scope>
+		</collection>
+
+
 		<collection name="definitions">
 			<scope name="swift.definition.function">
 				<symbol type="function">
@@ -225,6 +235,7 @@
 				</starts-with>
 				<ends-with>
 					<expression>{</expression>
+					<capture number="0" name="swift.bracket" />
 				</ends-with>
 				<subscopes>
 					<scope name="swift.arguments">
@@ -253,6 +264,13 @@
 				</subscopes>
 			</scope>
 
+			<scope name="swift.definition.end">
+				<symbol type="block">
+					<context behavior="end" />
+				</symbol>
+				<expression>}</expression>
+				<capture number="0" name="swift.bracket" />
+			</scope>
 
 		</collection>
 	</collections>
