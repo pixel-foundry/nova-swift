@@ -162,6 +162,15 @@
 	</scopes>
 
 	<collections>
+		<collection name="values">
+				<include syntax="self" collection="strings" />
+				<scope name="swift.value.null">
+					<strings>
+						<string>nil</string>
+					</strings>
+				</scope>
+		</collection>
+
 		<collection name="comments">
 			<scope name="swift.comment.single" spell-check="true">
 				<expression>///?(.*)$</expression>
@@ -189,18 +198,33 @@
 			</scope>
 		</collection>
 
+		<collection name="strings">
+			<scope name="swift.string.double-quoted">
+				<expression>&quot;(?:[^&quot;\\]|\\.)*(?:&quot;|$)</expression>
+				<capture number="0" name="swift.string.quoted.double" />
+			</scope>
+			<scope name="swift.string.multiline">
+				<starts-with>
+					<expression>\s?&quot;&quot;&quot;</expression>
+				</starts-with>
+				<ends-with>
+					<expression>&quot;&quot;&quot;</expression>
+				</ends-with>
+			</scope>
+		</collection>
+
 		<collection name="definitions">
 			<scope name="swift.definition.function">
 				<symbol type="function">
 					<context behavior="start" group="function" />
 				</symbol>
 				<starts-with>
-					<expression>\b[\s]?+(func)\s+([^\s]*)\(</expression>
+					<expression>\b[\s]*(func)\s+([^\s(){}]+)\(</expression>
 					<capture number="1" name="swift.keyword" />
 					<capture number="2" name="swift.identifier.function.name" />
 				</starts-with>
 				<ends-with>
-					<expression>\)[\s]+{</expression>
+					<expression>{</expression>
 				</ends-with>
 				<subscopes>
 					<scope name="swift.arguments">
@@ -209,7 +233,7 @@
 							<capture number="1" name="swift.bracket" />
 						</starts-with>
 						<ends-with>
-							<expression>(\))[\s]+{</expression>
+							<expression>(\))[\s]*{</expression>
 							<capture number="1" name="swift.bracket" />
 						</ends-with>
 						<subscopes>
@@ -218,7 +242,7 @@
 							</scope>
 							<scope name="swift.identifier.argument.name">
 								<symbol type="argument" />
-								<expression>(_[\s]+)?([\S]+):</expression>
+								<expression>(?:(_)[\s]+|[^\s{}()./]+[\s]+)?([^\s{}()./]+):</expression>
 								<capture number="1" name="swift.keyword" />
 								<capture number="2" name="swift.identifier.argument.name" />
 							</scope>
