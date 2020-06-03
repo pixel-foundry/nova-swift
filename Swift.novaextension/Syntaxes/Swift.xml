@@ -188,6 +188,49 @@
 				</ends-with>
 			</scope>
 		</collection>
+
+		<collection name="definitions">
+			<scope name="swift.definition.function">
+				<symbol type="function">
+					<context behavior="start" group="function" />
+				</symbol>
+				<starts-with>
+					<expression>\b[\s]?+(func)\s+([^\s]*)\(</expression>
+					<capture number="1" name="swift.keyword" />
+					<capture number="2" name="swift.identifier.function.name" />
+				</starts-with>
+				<ends-with>
+					<expression>\)[\s]+{</expression>
+				</ends-with>
+				<subscopes>
+					<scope name="swift.arguments">
+						<starts-with>
+							<expression>(\()</expression>
+							<capture number="1" name="swift.bracket" />
+						</starts-with>
+						<ends-with>
+							<expression>(\))[\s]+{</expression>
+							<capture number="1" name="swift.bracket" />
+						</ends-with>
+						<subscopes>
+							<scope name="swift.separator">
+								<expression>,</expression>
+							</scope>
+							<scope name="swift.identifier.argument.name">
+								<symbol type="argument" />
+								<expression>(_[\s]+)?([\S]+):</expression>
+								<capture number="1" name="swift.keyword" />
+								<capture number="2" name="swift.identifier.argument.name" />
+							</scope>
+							<include syntax="self" collection="values" />
+							<include syntax="self" collection="syntax" />
+						</subscopes>
+					</scope>
+				</subscopes>
+			</scope>
+
+
+		</collection>
 	</collections>
 
 </syntax>
