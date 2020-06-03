@@ -164,13 +164,25 @@
 
 	<collections>
 		<collection name="values">
-				<include syntax="self" collection="strings" />
-				<include syntax="self" collection="numbers" />
-				<scope name="swift.value.null">
-					<strings>
-						<string>nil</string>
-					</strings>
-				</scope>
+			<include syntax="self" collection="strings" />
+			<scope name="swift.value.null">
+				<strings>
+					<string>nil</string>
+				</strings>
+			</scope>
+			<scope name="swift.value.boolean">
+				<strings>
+					<string>true</string>
+					<string>false</string>
+				</strings>
+			</scope>
+			<scope name="swift.value.number.hex">
+				<expression>\b0x[a-fA-F0-9]+\b</expression>
+			</scope>
+			<scope name="swift.value.number">
+				<expression>\b\-?(?:\d+(?:\.\d)?|(?:\.\d+))\b</expression>
+			</scope>
+
 		</collection>
 
 		<collection name="comments">
@@ -214,14 +226,6 @@
 				</ends-with>
 			</scope>
 		</collection>
-
-		<collection name="numbers">
-			<scope name="swift.number">
-				<expression>=[\s]*([0-9.]+)</expression>
-				<capture number="1" name="swift.string.number.value" />
-			</scope>
-		</collection>
-
 
 		<collection name="definitions">
 			<scope name="swift.definition.function">
