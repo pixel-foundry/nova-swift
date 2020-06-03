@@ -1,0 +1,193 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<syntax name="swift">
+	<meta>
+		<name>Swift</name>
+		<type>script</type>
+		<preferred-file-extension>swift</preferred-file-extension>
+	</meta>
+
+	<detectors>
+		<extension priority="1.0">swift</extension>
+	</detectors>
+
+	<comments>
+		<multiline>
+			<starts-with>
+				<expression>/\*</expression>
+			</starts-with>
+			<ends-with>
+				<expression>\*/</expression>
+			</ends-with>
+		</multiline>
+		<single>
+			<expression>//</expression>
+		</single>
+	</comments>
+
+	<brackets>
+		<pair open="{" close="}" />
+		<pair open="[" close="]" />
+		<pair open="(" close=")" />
+	</brackets>
+
+	<surrounding-pairs>
+		<pair open="{" close="}" />
+		<pair open="[" close="]" />
+		<pair open="(" close=")" />
+		<pair open="&quot;" close="&quot;" />
+	</surrounding-pairs>
+
+	<symbols redefinition="within-construct">
+		<local scope="within-construct" />
+
+		<documentation mode="before" match-multiple="comment" />
+		<documentation mode="after" match-multiple="comment" />
+	</symbols>
+
+	<scopes>
+		<include syntax="self" collection="comments" />
+		<include syntax="self" collection="imports" />
+		<include syntax="self" collection="definitions" />
+
+		<scope name="swift.keyword">
+			<strings>
+				<!-- declarations -->
+				<string>associatedtype</string>
+				<string>class</string>
+				<string>deinit</string>
+				<string>enum</string>
+				<string>extension</string>
+				<string>fileprivate</string>
+				<string>func</string>
+				<string>import</string>
+				<string>init</string>
+				<string>inout</string>
+				<string>internal</string>
+				<string>let</string>
+				<string>open</string>
+				<string>operator</string>
+				<string>private</string>
+				<string>protocol</string>
+				<string>public</string>
+				<string>rethrows</string>
+				<string>static</string>
+				<string>struct</string>
+				<string>subscript</string>
+				<string>typealias</string>
+				<string>var</string>
+				<!-- statements -->
+				<string>break</string>
+				<string>case</string>
+				<string>continue</string>
+				<string>default</string>
+				<string>defer</string>
+				<string>do</string>
+				<string>else</string>
+				<string>fallthrough</string>
+				<string>for</string>
+				<string>guard</string>
+				<string>if</string>
+				<string>in</string>
+				<string>repeat</string>
+				<string>return</string>
+				<string>switch</string>
+				<string>where</string>
+				<string>while</string>
+				<!-- expressions and types -->
+				<string>as</string>
+				<string>Any</string>
+				<string>catch</string>
+				<string>false</string>
+				<string>is</string>
+				<string>nil</string>
+				<string>super</string>
+				<string>self</string>
+				<string>Self</string>
+				<string>throw</string>
+				<string>throws</string>
+				<string>true</string>
+				<string>try</string>
+				<!-- patterns -->
+				<string>_</string>
+				<!-- compiler -->
+				<string>#available</string>
+				<string>#colorLiteral</string>
+				<string>#column</string>
+				<string>#else</string>
+				<string>#elseif</string>
+				<string>#endif</string>
+				<string>#error</string>
+				<string>#file</string>
+				<string>#fileLiteral</string>
+				<string>#function</string>
+				<string>#if</string>
+				<string>#imageLiteral</string>
+				<string>#line</string>
+				<string>#selector</string>
+				<string>#sourceLocation</string>
+				<string>#warning</string>
+				<!-- context specific -->
+				<string>associativity</string>
+				<string>convenience</string>
+				<string>dynamic</string>
+				<string>didSet</string>
+				<string>final</string>
+				<string>get</string>
+				<string>infix</string>
+				<string>indirect</string>
+				<string>lazy</string>
+				<string>left</string>
+				<string>mutating</string>
+				<string>none</string>
+				<string>nonmutating</string>
+				<string>optional</string>
+				<string>override</string>
+				<string>postfix</string>
+				<string>precedence</string>
+				<string>prefix</string>
+				<string>Protocol</string>
+				<string>required</string>
+				<string>right</string>
+				<string>set</string>
+				<string>Type</string>
+				<string>unowned</string>
+				<string>weak</string>
+				<string>willSet</string>
+			</strings>
+		</scope>
+
+		<include syntax="self" collection="values" />
+		<include syntax="self" collection="identifiers" />
+		<include syntax="self" collection="syntax" />
+	</scopes>
+
+	<collections>
+		<collection name="comments">
+			<scope name="swift.comment.single" spell-check="true">
+				<expression>///?(.*)$</expression>
+				<capture number="1" name="swift.comment.content" />
+			</scope>
+			<scope name="swift.comment.block" spell-check="true">
+				<starts-with>
+					<expression>/\*\*?</expression>
+				</starts-with>
+				<ends-with>
+					<expression>\*/</expression>
+				</ends-with>
+			</scope>
+		</collection>
+
+		<collection name="imports">
+			<scope name="swift.import">
+				<starts-with>
+					<expression>\b(import)\b</expression>
+					<capture number="1" name="swift.keyword" />
+				</starts-with>
+				<ends-with>
+					<expression>$</expression>
+				</ends-with>
+			</scope>
+		</collection>
+	</collections>
+
+</syntax>
