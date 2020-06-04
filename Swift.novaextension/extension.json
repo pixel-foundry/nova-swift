@@ -2,7 +2,7 @@
     "identifier": "pixelfoundry.Swift",
     "name": "Swift",
     "vendor": "Pixel Foundry",
-    "description": "Lorem ipsum, dolor sit amet.",
-    "version": "1.0",
+    "description": "Swift syntax highlighting",
+    "version": "0.0.1",
     "categories": ["languages"]
 }
