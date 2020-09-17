@@ -85,11 +85,9 @@
 				<string>default</string>
 				<string>defer</string>
 				<string>do</string>
-				<string>else</string>
 				<string>fallthrough</string>
 				<string>for</string>
 				<string>guard</string>
-				<string>if</string>
 				<string>in</string>
 				<string>repeat</string>
 				<string>return</string>
@@ -140,26 +138,35 @@
 				<string>weak</string>
 				<string>willSet</string>
 			</strings>
+		</scope>
+		<scope name="swift.keyword">
 			<strings prefix="\#" word-boundary="false">
 				<string>available</string>
 				<string>colorLiteral</string>
 				<string>column</string>
-				<string>else</string>
 				<string>elseif</string>
 				<string>endif</string>
 				<string>error</string>
 				<string>file</string>
 				<string>fileLiteral</string>
 				<string>function</string>
-				<string>if</string>
 				<string>imageLiteral</string>
 				<string>line</string>
 				<string>selector</string>
 				<string>sourceLocation</string>
 				<string>warning</string>
 			</strings>
+		</scope>
+		<scope name="swift.keyword">
+			<strings prefix="\#?" word-boundary="false">
+				<string>if</string>
+				<string>else</string>
+			</strings>
+		</scope>
+		<scope name="swift.keyword">
 			<strings prefix="\@" word-boundary="false">
 				<string>_exported</string>
+				<string>available</string>
 				<string>discardableResult</string>
 			</strings>
 		</scope>
