@@ -85,9 +85,11 @@
 				<string>default</string>
 				<string>defer</string>
 				<string>do</string>
+				<string>else</string>
 				<string>fallthrough</string>
 				<string>for</string>
 				<string>guard</string>
+				<string>if</string>
 				<string>in</string>
 				<string>repeat</string>
 				<string>return</string>
@@ -144,6 +146,7 @@
 				<string>available</string>
 				<string>colorLiteral</string>
 				<string>column</string>
+				<string>else</string>
 				<string>elseif</string>
 				<string>endif</string>
 				<string>error</string>
@@ -158,9 +161,8 @@
 			</strings>
 		</scope>
 		<scope name="swift.keyword">
-			<strings prefix="\#?" word-boundary="false">
+			<strings prefix="\#" suffix="\s+\S+$" word-boundary="false">
 				<string>if</string>
-				<string>else</string>
 			</strings>
 		</scope>
 		<scope name="swift.keyword">
