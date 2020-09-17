@@ -2,8 +2,9 @@
 <syntax name="swift">
 	<meta>
 		<name>Swift</name>
-		<type>language</type>
+		<type>compiled</type>
 		<preferred-file-extension>swift</preferred-file-extension>
+		<scriptable shebang="#!/usr/bin/swift" />
 	</meta>
 
 	<detectors>
@@ -28,12 +29,14 @@
 		<pair open="{" close="}" />
 		<pair open="[" close="]" />
 		<pair open="(" close=")" />
+		<pair open="&lt;" close="&gt;" />
 	</brackets>
 
 	<surrounding-pairs>
 		<pair open="{" close="}" />
 		<pair open="[" close="]" />
 		<pair open="(" close=")" />
+		<pair open="&lt;" close="&gt;" />
 		<pair open="&quot;" close="&quot;" />
 	</surrounding-pairs>
 
@@ -107,24 +110,6 @@
 				<string>throws</string>
 				<string>true</string>
 				<string>try</string>
-				<string>@_exported</string>
-				<string>@discardableResult</string>
-				<string>#available</string>
-				<string>#colorLiteral</string>
-				<string>#column</string>
-				<string>#else</string>
-				<string>#elseif</string>
-				<string>#endif</string>
-				<string>#error</string>
-				<string>#file</string>
-				<string>#fileLiteral</string>
-				<string>#function</string>
-				<string>#if</string>
-				<string>#imageLiteral</string>
-				<string>#line</string>
-				<string>#selector</string>
-				<string>#sourceLocation</string>
-				<string>#warning</string>
 				<!-- patterns -->
 				<string>_</string>
 				<!-- context specific -->
@@ -154,6 +139,28 @@
 				<string>unowned</string>
 				<string>weak</string>
 				<string>willSet</string>
+			</strings>
+			<strings prefix="\#" word-boundary="false">
+				<string>available</string>
+				<string>colorLiteral</string>
+				<string>column</string>
+				<string>else</string>
+				<string>elseif</string>
+				<string>endif</string>
+				<string>error</string>
+				<string>file</string>
+				<string>fileLiteral</string>
+				<string>function</string>
+				<string>if</string>
+				<string>imageLiteral</string>
+				<string>line</string>
+				<string>selector</string>
+				<string>sourceLocation</string>
+				<string>warning</string>
+			</strings>
+			<strings prefix="\@" word-boundary="false">
+				<string>_exported</string>
+				<string>discardableResult</string>
 			</strings>
 		</scope>
 
