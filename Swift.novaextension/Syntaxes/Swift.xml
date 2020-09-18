@@ -53,128 +53,7 @@
 		<include syntax="self" collection="imports" />
 		<include syntax="self" collection="definitions" />
 		<include syntax="self" collection="identifiers" />
-		<include syntax="self" collection="syntax" />
-
-		<scope name="swift.keyword">
-			<strings>
-				<!-- declarations -->
-				<string>associatedtype</string>
-				<string>class</string>
-				<string>deinit</string>
-				<string>enum</string>
-				<string>extension</string>
-				<string>fileprivate</string>
-				<string>func</string>
-				<string>import</string>
-				<string>init</string>
-				<string>inout</string>
-				<string>internal</string>
-				<string>let</string>
-				<string>open</string>
-				<string>operator</string>
-				<string>private</string>
-				<string>protocol</string>
-				<string>public</string>
-				<string>rethrows</string>
-				<string>static</string>
-				<string>struct</string>
-				<string>subscript</string>
-				<string>typealias</string>
-				<string>var</string>
-				<!-- statements -->
-				<string>break</string>
-				<string>case</string>
-				<string>continue</string>
-				<string>default</string>
-				<string>defer</string>
-				<string>do</string>
-				<string>else</string>
-				<string>fallthrough</string>
-				<string>for</string>
-				<string>guard</string>
-				<string>if</string>
-				<string>in</string>
-				<string>repeat</string>
-				<string>return</string>
-				<string>switch</string>
-				<string>where</string>
-				<string>while</string>
-				<!-- expressions and types -->
-				<string>as</string>
-				<string>Any</string>
-				<string>catch</string>
-				<string>false</string>
-				<string>is</string>
-				<string>nil</string>
-				<string>super</string>
-				<string>self</string>
-				<string>Self</string>
-				<string>throw</string>
-				<string>throws</string>
-				<string>true</string>
-				<string>try</string>
-				<!-- patterns -->
-				<string>_</string>
-				<!-- context specific -->
-				<string>associativity</string>
-				<string>convenience</string>
-				<string>dynamic</string>
-				<string>didSet</string>
-				<string>final</string>
-				<string>get</string>
-				<string>infix</string>
-				<string>indirect</string>
-				<string>lazy</string>
-				<string>left</string>
-				<string>mutating</string>
-				<string>none</string>
-				<string>nonmutating</string>
-				<string>optional</string>
-				<string>override</string>
-				<string>postfix</string>
-				<string>precedence</string>
-				<string>prefix</string>
-				<string>Protocol</string>
-				<string>required</string>
-				<string>right</string>
-				<string>set</string>
-				<string>Type</string>
-				<string>unowned</string>
-				<string>weak</string>
-				<string>willSet</string>
-			</strings>
-		</scope>
-		<scope name="swift.keyword">
-			<strings prefix="\#" word-boundary="false">
-				<string>available</string>
-				<string>colorLiteral</string>
-				<string>column</string>
-				<string>else</string>
-				<string>elseif</string>
-				<string>endif</string>
-				<string>error</string>
-				<string>file</string>
-				<string>fileLiteral</string>
-				<string>function</string>
-				<string>imageLiteral</string>
-				<string>line</string>
-				<string>selector</string>
-				<string>sourceLocation</string>
-				<string>warning</string>
-			</strings>
-		</scope>
-		<scope name="swift.keyword">
-			<strings prefix="\#" suffix="\s+\S+$" word-boundary="false">
-				<string>if</string>
-			</strings>
-		</scope>
-		<scope name="swift.keyword">
-			<strings prefix="\@" word-boundary="false">
-				<string>_exported</string>
-				<string>available</string>
-				<string>discardableResult</string>
-			</strings>
-		</scope>
+		<include syntax="self" collection="keywords" />
 	</scopes>
 
 	<collections>
@@ -246,15 +125,15 @@
 
 			<scope name="swift.definition.function">
 				<symbol type="function">
-					<context behavior="start" group="function" />
+					<context behavior="subtree" group="function" />
 				</symbol>
 				<starts-with>
-					<expression>\b\s*(func)\s+([^\s(){}]+)\s*\(</expression>
+					<expression>\b(func)\s+([^\s(){}]+)\s*\(</expression>
 					<capture number="1" name="swift.keyword" />
 					<capture number="2" name="swift.identifier.function.name" />
 				</starts-with>
 				<ends-with>
-					<expression>\}</expression>
+					<expression>\)</expression>
 					<capture number="0" name="swift.bracket" />
 				</ends-with>
 				<subscopes>
@@ -278,8 +157,13 @@
 								<capture number="2" name="swift.identifier.argument.name" />
 								<capture number="3" name="swift.identifier.type.name" />
 							</scope>
+
 							<include syntax="self" collection="values" />
-							<include syntax="self" collection="syntax" />
+							<include syntax="self" collection="comments" />
+							<include syntax="self" collection="imports" />
+							<include syntax="self" collection="definitions" />
+							<include syntax="self" collection="identifiers" />
+							<include syntax="self" collection="keywords" />
 						</subscopes>
 					</scope>
 				</subscopes>
@@ -287,10 +171,10 @@
 
 			<scope name="swift.definition.class">
 				<symbol type="class">
-					<context behavior="start" group="class" />
+					<context behavior="subtree" group="class" />
 				</symbol>
 				<starts-with>
-					<expression>(class)\s*([^\s:;,.{}()&lt;&gt;\-–—!@#$%^&amp;*+=?&quot;&apos;\\|]+)[^{]*({)</expression>
+					<expression>\b(class)\s*([^\s:;,.{}()&lt;&gt;\-–—!@#$%^&amp;*+=?&quot;&apos;\\|]+)[^{]*({)</expression>
 					<capture number="1" name="swift.keyword" />
 					<capture number="2" name="swift.identifier.type.name" />
 					<capture number="3" name="swift.bracket" />
@@ -299,14 +183,22 @@
 					<expression>\}</expression>
 					<capture number="0" name="swift.bracket" />
 				</ends-with>
+				<subscopes>
+					<include syntax="self" collection="values" />
+					<include syntax="self" collection="comments" />
+					<include syntax="self" collection="imports" />
+					<include syntax="self" collection="definitions" />
+					<include syntax="self" collection="identifiers" />
+					<include syntax="self" collection="keywords" />
+				</subscopes>
 			</scope>
 
 			<scope name="swift.definition.enum">
 				<symbol type="enum">
-					<context behavior="start" group="enum" />
+					<context behavior="subtree" group="enum" />
 				</symbol>
 				<starts-with>
-					<expression>(enum)\s*([^\s:;,.{}()&lt;&gt;\-–—!@#$%^&amp;*+=?&quot;&apos;\\|]+)[^{]*({)</expression>
+					<expression>\b(enum)\s*([^\s:;,.{}()&lt;&gt;\-–—!@#$%^&amp;*+=?&quot;&apos;\\|]+)[^{]*({)</expression>
 					<capture number="1" name="swift.keyword" />
 					<capture number="2" name="swift.identifier.type.name" />
 					<capture number="3" name="swift.bracket" />
@@ -315,14 +207,22 @@
 					<expression>\}</expression>
 					<capture number="0" name="swift.bracket" />
 				</ends-with>
+				<subscopes>
+					<include syntax="self" collection="values" />
+					<include syntax="self" collection="comments" />
+					<include syntax="self" collection="imports" />
+					<include syntax="self" collection="definitions" />
+					<include syntax="self" collection="identifiers" />
+					<include syntax="self" collection="keywords" />
+				</subscopes>
 			</scope>
 
 			<scope name="swift.definition.struct">
 				<symbol type="struct">
-					<context behavior="start" group="struct" />
+					<context behavior="subtree" group="struct" />
 				</symbol>
 				<starts-with>
-					<expression>(struct)\s*([^\s:;,.{}()&lt;&gt;\-–—!@#$%^&amp;*+=?&quot;&apos;\\|]+)[^{]*({)</expression>
+					<expression>\b(struct)\s*([^\s:;,.{}()&lt;&gt;\-–—!@#$%^&amp;*+=?&quot;&apos;\\|]+)[^{]*({)</expression>
 					<capture number="1" name="swift.keyword" />
 					<capture number="2" name="swift.identifier.type.name" />
 					<capture number="3" name="swift.bracket" />
@@ -331,6 +231,36 @@
 					<expression>\}</expression>
 					<capture number="0" name="swift.bracket" />
 				</ends-with>
+				<subscopes>
+					<include syntax="self" collection="values" />
+					<include syntax="self" collection="comments" />
+					<include syntax="self" collection="imports" />
+					<include syntax="self" collection="definitions" />
+					<include syntax="self" collection="identifiers" />
+					<include syntax="self" collection="keywords" />
+				</subscopes>
+			</scope>
+
+			<scope name="swift.definition.closure">
+				<symbol type="closure">
+					<context behavior="subtree" group="closure" />
+				</symbol>
+				<starts-with>
+					<expression>{</expression>
+					<capture number="0" name="swift.bracket" />
+				</starts-with>
+				<ends-with>
+					<expression>}</expression>
+					<capture number="0" name="swift.bracket" />
+				</ends-with>
+				<subscopes>
+					<include syntax="self" collection="values" />
+					<include syntax="self" collection="comments" />
+					<include syntax="self" collection="imports" />
+					<include syntax="self" collection="definitions" />
+					<include syntax="self" collection="identifiers" />
+					<include syntax="self" collection="keywords" />
+				</subscopes>
 			</scope>
 		</collection>
 
@@ -355,6 +285,129 @@
 				</strings>
 			</scope>
 
+		</collection>
+
+		<collection name="keywords">
+			<scope name="swift.keyword">
+				<strings>
+					<!-- declarations -->
+					<string>associatedtype</string>
+					<string>class</string>
+					<string>deinit</string>
+					<string>enum</string>
+					<string>extension</string>
+					<string>fileprivate</string>
+					<string>func</string>
+					<string>import</string>
+					<string>init</string>
+					<string>inout</string>
+					<string>internal</string>
+					<string>let</string>
+					<string>open</string>
+					<string>operator</string>
+					<string>private</string>
+					<string>protocol</string>
+					<string>public</string>
+					<string>rethrows</string>
+					<string>static</string>
+					<string>struct</string>
+					<string>subscript</string>
+					<string>typealias</string>
+					<string>var</string>
+					<!-- statements -->
+					<string>break</string>
+					<string>case</string>
+					<string>continue</string>
+					<string>default</string>
+					<string>defer</string>
+					<string>do</string>
+					<string>else</string>
+					<string>fallthrough</string>
+					<string>for</string>
+					<string>guard</string>
+					<string>if</string>
+					<string>in</string>
+					<string>repeat</string>
+					<string>return</string>
+					<string>switch</string>
+					<string>where</string>
+					<string>while</string>
+					<!-- expressions and types -->
+					<string>as</string>
+					<string>Any</string>
+					<string>catch</string>
+					<string>false</string>
+					<string>is</string>
+					<string>nil</string>
+					<string>super</string>
+					<string>self</string>
+					<string>Self</string>
+					<string>throw</string>
+					<string>throws</string>
+					<string>true</string>
+					<string>try</string>
+					<!-- patterns -->
+					<string>_</string>
+					<!-- context specific -->
+					<string>associativity</string>
+					<string>convenience</string>
+					<string>dynamic</string>
+					<string>didSet</string>
+					<string>final</string>
+					<string>get</string>
+					<string>infix</string>
+					<string>indirect</string>
+					<string>lazy</string>
+					<string>left</string>
+					<string>mutating</string>
+					<string>none</string>
+					<string>nonmutating</string>
+					<string>optional</string>
+					<string>override</string>
+					<string>postfix</string>
+					<string>precedence</string>
+					<string>prefix</string>
+					<string>Protocol</string>
+					<string>required</string>
+					<string>right</string>
+					<string>set</string>
+					<string>Type</string>
+					<string>unowned</string>
+					<string>weak</string>
+					<string>willSet</string>
+				</strings>
+			</scope>
+			<scope name="swift.keyword">
+				<strings prefix="\#" word-boundary="false">
+					<string>available</string>
+					<string>colorLiteral</string>
+					<string>column</string>
+					<string>else</string>
+					<string>elseif</string>
+					<string>endif</string>
+					<string>error</string>
+					<string>file</string>
+					<string>fileLiteral</string>
+					<string>function</string>
+					<string>imageLiteral</string>
+					<string>line</string>
+					<string>selector</string>
+					<string>sourceLocation</string>
+					<string>warning</string>
+				</strings>
+			</scope>
+			<scope name="swift.keyword">
+				<strings prefix="\#" suffix="\s+\S+$" word-boundary="false">
+					<string>if</string>
+				</strings>
+			</scope>
+			<scope name="swift.keyword">
+				<strings prefix="\@" word-boundary="false">
+					<string>_exported</string>
+					<string>available</string>
+					<string>discardableResult</string>
+				</strings>
+			</scope>
 		</collection>
 	</collections>
 
