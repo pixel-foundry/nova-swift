@@ -52,3 +52,5 @@ Carthage/Build/
 # Accio dependency management
 Dependencies/
 .accio/
+
+.nova/
