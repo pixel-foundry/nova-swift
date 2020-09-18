@@ -48,9 +48,12 @@
 	</symbols>
 
 	<scopes>
+		<include syntax="self" collection="values" />
 		<include syntax="self" collection="comments" />
 		<include syntax="self" collection="imports" />
 		<include syntax="self" collection="definitions" />
+		<include syntax="self" collection="identifiers" />
+		<include syntax="self" collection="syntax" />
 
 		<scope name="swift.keyword">
 			<strings>
@@ -172,10 +175,6 @@
 				<string>discardableResult</string>
 			</strings>
 		</scope>
-
-		<include syntax="self" collection="values" />
-		<include syntax="self" collection="identifiers" />
-		<include syntax="self" collection="syntax" />
 	</scopes>
 
 	<collections>
@@ -244,17 +243,18 @@
 		</collection>
 
 		<collection name="definitions">
+
 			<scope name="swift.definition.function">
 				<symbol type="function">
 					<context behavior="start" group="function" />
 				</symbol>
 				<starts-with>
-					<expression>\b[\s]*(func)\s+([^\s(){}]+)\(</expression>
+					<expression>\b\s*(func)\s+([^\s(){}]+)\s*\(</expression>
 					<capture number="1" name="swift.keyword" />
 					<capture number="2" name="swift.identifier.function.name" />
 				</starts-with>
 				<ends-with>
-					<expression>{</expression>
+					<expression>\}</expression>
 					<capture number="0" name="swift.bracket" />
 				</ends-with>
 				<subscopes>
@@ -264,7 +264,7 @@
 							<capture number="1" name="swift.bracket" />
 						</starts-with>
 						<ends-with>
-							<expression>(\))[\s]*{</expression>
+							<expression>(\))\s*{</expression>
 							<capture number="1" name="swift.bracket" />
 						</ends-with>
 						<subscopes>
@@ -273,7 +273,7 @@
 							</scope>
 							<scope name="swift.identifier.argument">
 								<symbol type="argument" />
-								<expression>(?:(_)[\s]+)?(?:[^\s:;,.{}()&lt;&gt;\-–—!@#$%^&amp;*+=?&quot;&apos;\\|]+)?[\s]+([^\s{}()./]+):[\s]*([^\s:;,.{}()&lt;&gt;\-–—!@#$%^&amp;*+=?&quot;&apos;\\|]+)</expression>
+								<expression>(?:(_)\s+)?(?:[^\s:;,.{}()&lt;&gt;\-–—!@#$%^&amp;*+=?&quot;&apos;\\|]+)?\s+([^\s{}()./]+):\s*([^\s:;,.{}()&lt;&gt;\-–—!@#$%^&amp;*+=?&quot;&apos;\\|]+)</expression>
 								<capture number="1" name="swift.keyword" />
 								<capture number="2" name="swift.identifier.argument.name" />
 								<capture number="3" name="swift.identifier.type.name" />
@@ -290,12 +290,13 @@
 					<context behavior="start" group="class" />
 				</symbol>
 				<starts-with>
-					<expression>(class)[\s]*([^\s:;,.{}()&lt;&gt;\-–—!@#$%^&amp;*+=?&quot;&apos;\\|]+)</expression>
+					<expression>(class)\s*([^\s:;,.{}()&lt;&gt;\-–—!@#$%^&amp;*+=?&quot;&apos;\\|]+)[^{]*({)</expression>
 					<capture number="1" name="swift.keyword" />
 					<capture number="2" name="swift.identifier.type.name" />
+					<capture number="3" name="swift.bracket" />
 				</starts-with>
 				<ends-with>
-					<expression>{</expression>
+					<expression>\}</expression>
 					<capture number="0" name="swift.bracket" />
 				</ends-with>
 			</scope>
@@ -305,12 +306,13 @@
 					<context behavior="start" group="enum" />
 				</symbol>
 				<starts-with>
-					<expression>(enum)[\s]*([^\s:;,.{}()&lt;&gt;\-–—!@#$%^&amp;*+=?&quot;&apos;\\|]+)</expression>
+					<expression>(enum)\s*([^\s:;,.{}()&lt;&gt;\-–—!@#$%^&amp;*+=?&quot;&apos;\\|]+)[^{]*({)</expression>
 					<capture number="1" name="swift.keyword" />
 					<capture number="2" name="swift.identifier.type.name" />
+					<capture number="3" name="swift.bracket" />
 				</starts-with>
 				<ends-with>
-					<expression>{</expression>
+					<expression>\}</expression>
 					<capture number="0" name="swift.bracket" />
 				</ends-with>
 			</scope>
@@ -320,12 +322,13 @@
 					<context behavior="start" group="struct" />
 				</symbol>
 				<starts-with>
-					<expression>(struct)[\s]*([^\s:;,.{}()&lt;&gt;\-–—!@#$%^&amp;*+=?&quot;&apos;\\|]+)</expression>
+					<expression>(struct)\s*([^\s:;,.{}()&lt;&gt;\-–—!@#$%^&amp;*+=?&quot;&apos;\\|]+)[^{]*({)</expression>
 					<capture number="1" name="swift.keyword" />
 					<capture number="2" name="swift.identifier.type.name" />
+					<capture number="3" name="swift.bracket" />
 				</starts-with>
 				<ends-with>
-					<expression>{</expression>
+					<expression>\}</expression>
 					<capture number="0" name="swift.bracket" />
 				</ends-with>
 			</scope>
