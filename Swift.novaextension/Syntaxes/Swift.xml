@@ -180,7 +180,7 @@
 					<context behavior="subtree" group="class" />
 				</symbol>
 				<starts-with>
-					<expression>\b(class)\s+([^\s:;,.{}()&lt;&gt;\-–—!@#$%^&amp;*+=?&quot;&apos;\\|]+)[^{]*({)</expression>
+					<expression>\b(class)\s+([^\s:;,.{}()&lt;&gt;\-–—!@#$%^&amp;*+=?&quot;&apos;\\|]+)[^{]*?({)</expression>
 					<capture number="1" name="swift.keyword" />
 					<capture number="2" name="swift.identifier.type.name" />
 					<capture number="3" name="swift.bracket" />
@@ -204,7 +204,7 @@
 					<context behavior="subtree" group="enum" />
 				</symbol>
 				<starts-with>
-					<expression>\b(enum)\s+([^\s:;,.{}()&lt;&gt;\-–—!@#$%^&amp;*+=?&quot;&apos;\\|]+)[^{]*({)</expression>
+					<expression>\b(enum)\s+([^\s:;,.{}()&lt;&gt;\-–—!@#$%^&amp;*+=?&quot;&apos;\\|]+)[^{]*?({)</expression>
 					<capture number="1" name="swift.keyword" />
 					<capture number="2" name="swift.identifier.type.name" />
 					<capture number="3" name="swift.bracket" />
@@ -228,7 +228,7 @@
 					<context behavior="subtree" group="struct" />
 				</symbol>
 				<starts-with>
-					<expression>\b(struct)\s+([^\s:;,.{}()&lt;&gt;\-–—!@#$%^&amp;*+=?&quot;&apos;\\|]+)[^{]*({)</expression>
+					<expression>\b(struct)\s+([^\s:;,.{}()&lt;&gt;\-–—!@#$%^&amp;*+=?&quot;&apos;\\|]+)[^{]*?({)</expression>
 					<capture number="1" name="swift.keyword" />
 					<capture number="2" name="swift.identifier.type.name" />
 					<capture number="3" name="swift.bracket" />
