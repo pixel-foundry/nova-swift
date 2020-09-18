@@ -156,7 +156,7 @@
 					<context behavior="subtree" group="function" />
 				</symbol>
 				<starts-with>
-					<expression>\b(func)\s+([^\s:;,.{}()&lt;&gt;\-–—!@#$%^&amp;*+=?&quot;&apos;\\|]+)\([\S\s]+\)\s*({)</expression>
+					<expression>\b(func)\s+([^\s:;,.{}()&lt;&gt;\-–—!@#$%^&amp;*+=?&quot;&apos;\\|]+)\s*\([\S\s]*?\)[\S\s]*?({)</expression>
 					<capture number="1" name="swift.keyword" />
 					<capture number="2" name="swift.identifier.function.name" />
 					<capture number="3" name="swift.bracket" />
