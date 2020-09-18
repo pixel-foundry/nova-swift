@@ -329,13 +329,27 @@
 					<capture number="0" name="swift.bracket" />
 				</ends-with>
 			</scope>
+		</collection>
 
-			<scope name="swift.definition.end">
-				<symbol type="block">
-					<context behavior="end" />
-				</symbol>
-				<expression>}</expression>
-				<capture number="0" name="swift.bracket" />
+		<collection name="identifiers">
+			<scope name="swift.identifier.variable">
+				<include syntax="self" collection="identifiers" />
+				<expression>\b(let|var)\s+([^\s:;,.{}()&lt;&gt;\-–—!@#$%^&amp;*+=?&quot;&apos;\\|]+)</expression>
+				<capture number="1" name="swift.keyword" />
+				<capture number="2" name="swift.identifier.variable.name" />
+			</scope>
+
+			<scope name="swift.identifier.type.basic">
+				<strings>
+					<string>Bool</string>
+					<string>Character</string>
+					<string>Double</string>
+					<string>Float</string>
+					<string>Int</string>
+					<string>Optional</string>
+					<string>String</string>
+					<string>UInt</string>
+				</strings>
 			</scope>
 
 		</collection>
