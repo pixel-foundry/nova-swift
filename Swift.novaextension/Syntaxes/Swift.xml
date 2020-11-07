@@ -122,34 +122,6 @@
 
 		<collection name="definitions">
 
-			<scope name="swift.arguments">
-				<starts-with>
-					<expression>(\()</expression>
-					<capture number="1" name="swift.bracket" />
-				</starts-with>
-				<ends-with>
-					<expression>(\))</expression>
-					<capture number="1" name="swift.bracket" />
-				</ends-with>
-				<subscopes>
-					<include syntax="self" collection="values" />
-					<include syntax="self" collection="keywords" />
-					<include syntax="self" collection="identifiers" />
-					<include syntax="self" collection="definitions" />
-
-					<scope name="swift.separator">
-						<expression>,</expression>
-					</scope>
-					<scope name="swift.identifier.argument">
-						<symbol type="argument" />
-						<expression>(?:(_)\s+)?(?:[^\s:;,.{}()&lt;&gt;\-–—!@#$%^&amp;*+=?&quot;&apos;\\|]+)?\s+([^\s{}()./]+):\s*([^\s:;,.{}()&lt;&gt;\-–—!@#$%^&amp;*+=?&quot;&apos;\\|]+)</expression>
-						<capture number="1" name="swift.keyword" />
-						<capture number="2" name="swift.identifier.argument.name" />
-						<capture number="3" name="swift.identifier.type.name" />
-					</scope>
-				</subscopes>
-			</scope>
-
 			<scope name="swift.definition.function">
 				<symbol type="function">
 					<context behavior="subtree" group="function" />
