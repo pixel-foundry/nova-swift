@@ -263,11 +263,19 @@
 		</collection>
 
 		<collection name="identifiers">
-			<scope name="swift.identifier.variable">
-				<include syntax="self" collection="identifiers" />
-				<expression>\b(let|var)\s+([^\s:;,.{}()&lt;&gt;\-–—!@#$%^&amp;*+=?&quot;&apos;\\|]+)</expression>
-				<capture number="1" name="swift.keyword" />
-				<capture number="2" name="swift.identifier.variable.name" />
+			<scope name="swift">
+				<starts-with>
+					<expression>\b(let|var)</expression>
+					<capture number="1" name="swift.keyword" />
+				</starts-with>
+				<ends-with>
+					<expression>(?:(?=(?:{|=))|[^{=]+?$)</expression>
+				</ends-with>
+				<subscopes>
+					<scope name="swift.identifier.variable.name">
+						<expression>(?:(?&lt;=(?:let|var))|^)\s*([^\s:;,.{}()&lt;&gt;\-–—!@#$%^&amp;*+=?&quot;&apos;\\|]+)</expression>
+					</scope>
+				</subscopes>
 			</scope>
 
 			<scope name="swift.identifier.type.basic">
