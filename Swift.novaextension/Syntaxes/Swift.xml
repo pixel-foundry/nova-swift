@@ -107,49 +107,20 @@
 		</collection>
 
 		<collection name="strings">
-			<scope name="swift.string.double-quoted">
-				<expression>&quot;(?:[^&quot;\\]|\\.)*(?:&quot;|$)</expression>
-				<capture number="0" name="swift.string.quoted.double" />
-			</scope>
 			<scope name="swift.string.multiline">
 				<starts-with>
-					<expression>\s?&quot;&quot;&quot;</expression>
+					<expression>&quot;&quot;&quot;</expression>
 				</starts-with>
 				<ends-with>
 					<expression>&quot;&quot;&quot;</expression>
 				</ends-with>
 			</scope>
+			<scope name="swift.string.singleline">
+				<expression>&quot;(?:[^&quot;\\]|\\.)*(?:&quot;|$)</expression>
+			</scope>
 		</collection>
 
 		<collection name="definitions">
-
-			<scope name="swift.arguments">
-				<starts-with>
-					<expression>(\()</expression>
-					<capture number="1" name="swift.bracket" />
-				</starts-with>
-				<ends-with>
-					<expression>(\))</expression>
-					<capture number="1" name="swift.bracket" />
-				</ends-with>
-				<subscopes>
-					<include syntax="self" collection="values" />
-					<include syntax="self" collection="keywords" />
-					<include syntax="self" collection="identifiers" />
-					<include syntax="self" collection="definitions" />
-
-					<scope name="swift.separator">
-						<expression>,</expression>
-					</scope>
-					<scope name="swift.identifier.argument">
-						<symbol type="argument" />
-						<expression>(?:(_)\s+)?(?:[^\s:;,.{}()&lt;&gt;\-–—!@#$%^&amp;*+=?&quot;&apos;\\|]+)?\s+([^\s{}()./]+):\s*([^\s:;,.{}()&lt;&gt;\-–—!@#$%^&amp;*+=?&quot;&apos;\\|]+)</expression>
-						<capture number="1" name="swift.keyword" />
-						<capture number="2" name="swift.identifier.argument.name" />
-						<capture number="3" name="swift.identifier.type.name" />
-					</scope>
-				</subscopes>
-			</scope>
 
 			<scope name="swift.definition.function">
 				<symbol type="function">
@@ -268,14 +239,48 @@
 					<include syntax="self" collection="keywords" />
 				</subscopes>
 			</scope>
+
+			<scope name="swift.definition.directive">
+				<starts-with>
+					<expression>(\#if)\s*(\S*)?$</expression>
+					<capture number="1" name="swift.keyword" />
+					<capture number="2" name="swift.keyword" />
+				</starts-with>
+				<ends-with>
+					<expression>\#endif</expression>
+					<capture number="0" name="swift.keyword" />
+				</ends-with>
+				<subscopes>
+					<include syntax="self" collection="values" />
+					<include syntax="self" collection="comments" />
+					<include syntax="self" collection="imports" />
+					<include syntax="self" collection="definitions" />
+					<include syntax="self" collection="identifiers" />
+					<include syntax="self" collection="keywords" />
+				</subscopes>
+			</scope>
+
 		</collection>
 
 		<collection name="identifiers">
-			<scope name="swift.identifier.variable">
-				<include syntax="self" collection="identifiers" />
-				<expression>\b(let|var)\s+([^\s:;,.{}()&lt;&gt;\-–—!@#$%^&amp;*+=?&quot;&apos;\\|]+)</expression>
-				<capture number="1" name="swift.keyword" />
-				<capture number="2" name="swift.identifier.variable.name" />
+			<scope name="swift.identifier">
+				<starts-with>
+					<expression>\b(let|var)\b</expression>
+					<capture number="1" name="swift.keyword" />
+				</starts-with>
+				<ends-with>
+					<expression>(?={|=|(?::\s*([^\s:;,.{}()&lt;&gt;\-–—!@#$%^&amp;*+=?&quot;&apos;\\|]+)\??))</expression>
+					<capture number="1" name="swift.identifier.type" />
+				</ends-with>
+				<subscopes>
+					<include syntax="self" collection="identifiers" />
+					<scope name="swift.identifier.variable.name">
+						<expression>(?:(?&lt;=(?:let|var))|^)\s*([^\s:;,.{}()&lt;&gt;\-–—!@#$%^&amp;*+=?&quot;&apos;\\|]+)</expression>
+					</scope>
+					<scope name="swift.identifier.type">
+						<expression>(?&lt;=:)\s+([^\s:;,.{}()&lt;&gt;\-–—!@#$%^&amp;*+=?&quot;&apos;\\|]+)</expression>
+					</scope>
+				</subscopes>
 			</scope>
 
 			<scope name="swift.identifier.type.basic">
@@ -388,13 +393,17 @@
 					<string>available</string>
 					<string>colorLiteral</string>
 					<string>column</string>
+					<string>dsohandle</string>
 					<string>else</string>
 					<string>elseif</string>
 					<string>endif</string>
 					<string>error</string>
 					<string>file</string>
+					<string>fileID</string>
 					<string>fileLiteral</string>
+					<string>filePath</string>
 					<string>function</string>
+					<string>if</string>
 					<string>imageLiteral</string>
 					<string>line</string>
 					<string>selector</string>
@@ -403,15 +412,11 @@
 				</strings>
 			</scope>
 			<scope name="swift.keyword">
-				<strings prefix="\#" suffix="\s+\S+$" word-boundary="false">
-					<string>if</string>
-				</strings>
-			</scope>
-			<scope name="swift.keyword">
 				<strings prefix="\@" word-boundary="false">
 					<string>_exported</string>
 					<string>available</string>
 					<string>discardableResult</string>
+					<string>testable</string>
 				</strings>
 			</scope>
 		</collection>
