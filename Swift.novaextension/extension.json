@@ -5,5 +5,6 @@
     "description": "Swift syntax highlighting",
     "version": "0.0.1",
     "categories": ["languages"],
+    "repository": "https://github.com/pixel-foundry/nova-swift",
     "bugs": "https://github.com/pixel-foundry/nova-swift/issues"
 }
