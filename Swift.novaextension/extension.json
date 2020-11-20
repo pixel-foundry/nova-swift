@@ -3,7 +3,7 @@
     "name": "Swift",
     "organization": "Pixel Foundry",
     "description": "Swift syntax highlighting",
-    "version": "0.0.2",
+    "version": "0.0.3",
     "categories": ["languages"],
     "repository": "https://github.com/pixel-foundry/nova-swift",
     "bugs": "https://github.com/pixel-foundry/nova-swift/issues"
