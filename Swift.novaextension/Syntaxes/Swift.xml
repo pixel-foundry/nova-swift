@@ -161,6 +161,9 @@
 					<include syntax="self" collection="comments" />
 					<include syntax="self" collection="identifiers" />
 					<include syntax="self" collection="keywords" />
+					<cut-off>
+						<expression>(?=\b(?:class|struct|enum|protocol|let|var|func|final)\b)</expression>
+					</cut-off>
 				</subscopes>
 			</scope>
 
@@ -179,6 +182,9 @@
 					<include syntax="self" collection="comments" />
 					<include syntax="self" collection="identifiers" />
 					<include syntax="self" collection="keywords" />
+					<cut-off>
+						<expression>(?=\b(?:class|struct|enum|protocol|let|var|func|final)\b)</expression>
+					</cut-off>
 				</subscopes>
 			</scope>
 
@@ -197,6 +203,9 @@
 					<include syntax="self" collection="comments" />
 					<include syntax="self" collection="identifiers" />
 					<include syntax="self" collection="keywords" />
+					<cut-off>
+						<expression>(?=\b(?:class|struct|enum|protocol|let|var|func|final)\b)</expression>
+					</cut-off>
 				</subscopes>
 			</scope>
 
@@ -215,6 +224,9 @@
 					<include syntax="self" collection="comments" />
 					<include syntax="self" collection="identifiers" />
 					<include syntax="self" collection="keywords" />
+					<cut-off>
+						<expression>(?=\b(?:class|struct|enum|protocol|let|var|func|final)\b)</expression>
+					</cut-off>
 				</subscopes>
 			</scope>
 
@@ -264,7 +276,7 @@
 
 		<collection name="declarations">
 			<scope name="swift.identifier.type.name">
-				<expression>(some\s+)?([^\s:;,.{}()&lt;&gt;\-–—!@#$%^&amp;*+=?&quot;&apos;\\|]+)\s*</expression>
+				<expression>\b(some\s+)?([^\s:;,.{}()&lt;&gt;\-–—!@#$%^&amp;*+=?&quot;&apos;\\|]+)\b</expression>
 				<capture number="1" name="swift.keyword" />
 				<capture number="2" name="swift.identifier.type.name" />
 			</scope>
@@ -278,13 +290,15 @@
 				</starts-with>
 				<ends-with>
 					<expression>(?={|=)</expression>
-					<capture number="1" name="swift.identifier.type" />
 				</ends-with>
 				<subscopes>
 					<include syntax="self" collection="declarations" />
 					<include syntax="self" collection="comments" />
 					<include syntax="self" collection="identifiers" />
 					<include syntax="self" collection="keywords" />
+					<cut-off>
+						<expression>(?=\b(?:class|struct|enum|protocol|let|var|func|final)\b)</expression>
+					</cut-off>
 				</subscopes>
 			</scope>
 
