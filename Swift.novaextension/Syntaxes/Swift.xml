@@ -147,72 +147,72 @@
 			</scope>
 
 			<scope name="swift.definition.class">
-				<symbol type="class">
-					<context behavior="subtree" group="class" />
-				</symbol>
+				<symbol type="class" />
 				<starts-with>
-					<expression>\b(class)\s+([^\s:;,.{}()&lt;&gt;\-–—!@#$%^&amp;*+=?&quot;&apos;\\|]+)[^{]*?({)</expression>
+					<expression>\b(class)\b</expression>
 					<capture number="1" name="swift.keyword" />
-					<capture number="2" name="swift.identifier.type.name" />
-					<capture number="3" name="swift.bracket" />
 				</starts-with>
 				<ends-with>
-					<expression>\}</expression>
+					<expression>(?={)</expression>
 					<capture number="0" name="swift.bracket" />
 				</ends-with>
 				<subscopes>
-					<include syntax="self" collection="values" />
+					<include syntax="self" collection="declarations" />
 					<include syntax="self" collection="comments" />
-					<include syntax="self" collection="imports" />
-					<include syntax="self" collection="definitions" />
 					<include syntax="self" collection="identifiers" />
 					<include syntax="self" collection="keywords" />
 				</subscopes>
 			</scope>
 
 			<scope name="swift.definition.enum">
-				<symbol type="enum">
-					<context behavior="subtree" group="enum" />
-				</symbol>
+				<symbol type="enum" />
 				<starts-with>
-					<expression>\b(enum)\s+([^\s:;,.{}()&lt;&gt;\-–—!@#$%^&amp;*+=?&quot;&apos;\\|]+)[^{]*?({)</expression>
+					<expression>\b(enum)\b</expression>
 					<capture number="1" name="swift.keyword" />
-					<capture number="2" name="swift.identifier.type.name" />
-					<capture number="3" name="swift.bracket" />
 				</starts-with>
 				<ends-with>
-					<expression>\}</expression>
+					<expression>(?={)</expression>
 					<capture number="0" name="swift.bracket" />
 				</ends-with>
 				<subscopes>
-					<include syntax="self" collection="values" />
+					<include syntax="self" collection="declarations" />
 					<include syntax="self" collection="comments" />
-					<include syntax="self" collection="imports" />
-					<include syntax="self" collection="definitions" />
 					<include syntax="self" collection="identifiers" />
 					<include syntax="self" collection="keywords" />
 				</subscopes>
 			</scope>
 
 			<scope name="swift.definition.struct">
-				<symbol type="struct">
-					<context behavior="subtree" group="struct" />
-				</symbol>
+				<symbol type="struct" />
 				<starts-with>
-					<expression>\b(struct)\s+([^\s:;,.{}()&lt;&gt;\-–—!@#$%^&amp;*+=?&quot;&apos;\\|]+)[^{]*?({)</expression>
+					<expression>\b(struct)\b</expression>
 					<capture number="1" name="swift.keyword" />
-					<capture number="2" name="swift.identifier.type.name" />
-					<capture number="3" name="swift.bracket" />
 				</starts-with>
 				<ends-with>
-					<expression>\}</expression>
+					<expression>(?={)</expression>
 					<capture number="0" name="swift.bracket" />
 				</ends-with>
 				<subscopes>
-					<include syntax="self" collection="values" />
+					<include syntax="self" collection="declarations" />
 					<include syntax="self" collection="comments" />
-					<include syntax="self" collection="imports" />
-					<include syntax="self" collection="definitions" />
+					<include syntax="self" collection="identifiers" />
+					<include syntax="self" collection="keywords" />
+				</subscopes>
+			</scope>
+
+			<scope name="swift.definition.protocol">
+				<symbol type="interface" />
+				<starts-with>
+					<expression>\b(protocol)\b</expression>
+					<capture number="1" name="swift.keyword" />
+				</starts-with>
+				<ends-with>
+					<expression>(?={)</expression>
+					<capture number="0" name="swift.bracket" />
+				</ends-with>
+				<subscopes>
+					<include syntax="self" collection="declarations" />
+					<include syntax="self" collection="comments" />
 					<include syntax="self" collection="identifiers" />
 					<include syntax="self" collection="keywords" />
 				</subscopes>
@@ -262,6 +262,14 @@
 
 		</collection>
 
+		<collection name="declarations">
+			<scope name="swift.identifier.type.name">
+				<expression>(some\s+)?([^\s:;,.{}()&lt;&gt;\-–—!@#$%^&amp;*+=?&quot;&apos;\\|]+)\s*</expression>
+				<capture number="1" name="swift.keyword" />
+				<capture number="2" name="swift.identifier.type.name" />
+			</scope>
+		</collection>
+
 		<collection name="identifiers">
 			<scope name="swift.identifier">
 				<starts-with>
@@ -269,17 +277,14 @@
 					<capture number="1" name="swift.keyword" />
 				</starts-with>
 				<ends-with>
-					<expression>(?={|=|(?::\s*([^\s:;,.{}()&lt;&gt;\-–—!@#$%^&amp;*+=?&quot;&apos;\\|]+)\??))</expression>
+					<expression>(?={|=)</expression>
 					<capture number="1" name="swift.identifier.type" />
 				</ends-with>
 				<subscopes>
+					<include syntax="self" collection="declarations" />
+					<include syntax="self" collection="comments" />
 					<include syntax="self" collection="identifiers" />
-					<scope name="swift.identifier.variable.name">
-						<expression>(?:(?&lt;=(?:let|var))|^)\s*([^\s:;,.{}()&lt;&gt;\-–—!@#$%^&amp;*+=?&quot;&apos;\\|]+)</expression>
-					</scope>
-					<scope name="swift.identifier.type">
-						<expression>(?&lt;=:)\s+([^\s:;,.{}()&lt;&gt;\-–—!@#$%^&amp;*+=?&quot;&apos;\\|]+)</expression>
-					</scope>
+					<include syntax="self" collection="keywords" />
 				</subscopes>
 			</scope>
 
