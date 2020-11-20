@@ -416,6 +416,7 @@
 					<string>_exported</string>
 					<string>available</string>
 					<string>discardableResult</string>
+					<string>main</string>
 					<string>testable</string>
 				</strings>
 			</scope>
